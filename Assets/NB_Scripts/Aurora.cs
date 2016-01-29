@@ -15,7 +15,7 @@ public class Aurora : MonoBehaviour {
 	void Update () {
 		
 			if(reversed == false){
-				offset += 0.1f*Time.deltaTime;
+				offset += Random.Range(0.05f, 0.1f) * Time.deltaTime;
 			}
 			else{
 				offset -= 0.1f*Time.deltaTime;
