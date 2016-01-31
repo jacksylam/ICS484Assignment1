@@ -14,7 +14,13 @@ public class linerenderellipse : MonoBehaviour {
     private float xTemp;
     private float yTemp;
     
-    private bool reverse;
+    private bool reversex;
+    private bool reversey;
+
+    private float randomMin = 0f;
+    private float randomMax = 0.05f;
+
+    private float offset;
 
     void Start() {
         line = gameObject.GetComponent<LineRenderer>();
@@ -23,9 +29,15 @@ public class linerenderellipse : MonoBehaviour {
         line.useWorldSpace = false;
         CreatePoints();
         xTemp = xradius;
-        yTemp = 1;
+        yTemp = 0.1f;
+        reversex = true;
+        reversey = true;
+        Color start = Color.green;
+        start.a = 0.2f;
+        line.SetColors(start, start);
     }
 
+  
 
     void CreatePoints() {
         float x;
@@ -36,7 +48,7 @@ public class linerenderellipse : MonoBehaviour {
 
         for (int i = 0; i < (segments + 1); i++) {
             x = Mathf.Sin(Mathf.Deg2Rad * angle) * xradius;
-            y = Mathf.Cos(Mathf.Deg2Rad * angle) * 0;
+            y = Mathf.Cos(Mathf.Deg2Rad * angle) * 0.1f;
 
             line.SetPosition(i, new Vector3(x, y, z));
 
@@ -47,19 +59,30 @@ public class linerenderellipse : MonoBehaviour {
     void Update() {
         if (Time.time > nextActionTime) {
             nextActionTime = Time.time + period;
-            if (xTemp > xradius || yTemp > yradius) {
-                reverse = true;
+            if (xTemp > xradius) {
+                reversex = true;
             }
-            else if (xTemp < 0 || yTemp < 0) {
-                reverse = false;
+            else if(xTemp < 1){
+                reversex = false;
             }
-            if (!reverse) {
-                xTemp = xTemp + Random.Range(0.1f,0.6f);
-                yTemp = yTemp + Random.Range(0.1f, 0.6f);
+            if (!reversex) {
+                xTemp = xTemp + Random.Range(randomMin, randomMax);
             }
             else {
-                xTemp = xTemp - Random.Range(0.1f, 0.6f);
-                yTemp = yTemp - Random.Range(0.1f, 0.6f);
+                xTemp = xTemp - Random.Range(randomMin, randomMax);
+            }
+
+            if (yTemp > yradius) {
+                reversey = true;
+            }
+            else if (yTemp < 1) {
+                reversey = false;
+            }
+            if (!reversey) {
+                yTemp = yTemp + Random.Range(randomMin, randomMax);
+            }
+            else {
+                yTemp = yTemp - Random.Range(randomMin, randomMax);
             }
 
             float x;
@@ -75,7 +98,12 @@ public class linerenderellipse : MonoBehaviour {
 
                 angle += (360f / segments);
             }
+
+           line.transform.Rotate(Vector3.right * Time.deltaTime);
         }
+
+        	offset += Random.Range(0.05f, 0.1f) * Time.deltaTime;
+			line.material.SetTextureOffset("_MainTex", new Vector2(offset/3, offset));
     }
 
     void OnDrawGizmos() {
