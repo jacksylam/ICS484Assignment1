@@ -19,11 +19,11 @@ Loading H:\My Docs\GitHub\ICS484Assignment1\build_Data\Managed\UnityEngine.UI.dl
 Platform assembly: H:\My Docs\GitHub\ICS484Assignment1\build_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading H:\My Docs\GitHub\ICS484Assignment1\build_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: H:\My Docs\GitHub\ICS484Assignment1\build_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.042 seconds
+- Completed reload, in  0.041 seconds
 desktop: 1920x1080 60Hz; virtual: 3000x1920 at -1080,-840
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: H:\My Docs\GitHub\ICS484Assignment1\build_Data\Managed\System.dll (this message is harmless)
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 2f34 -> priority: 1 
+  Thread -> id: 1310 -> priority: 1 
